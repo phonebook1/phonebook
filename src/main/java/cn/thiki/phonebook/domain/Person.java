@@ -4,15 +4,22 @@ package cn.thiki.phonebook.domain;
  * Created by Administrator on 2015/9/4.
  */
 public class Person {
+    /**
+     * 添加Person的属性;
+     */
     private int id;
     private String name;
-    private String phoneNumber;
+    private String phonenumber;
     private String company;
-    private int groupId;
     private String birthPlace;
-    private boolean sex;
+    private String sex;
+    private int groupId;
     private String personRepository;
 
+    /**
+     * 写各属性的get and set方法;
+     * @return
+     */
     public int getId() {
         return id;
     }
@@ -29,12 +36,12 @@ public class Person {
         this.name = name;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public String getPhonenumber() {
+        return phonenumber;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setPhonenumber(String phonenumber) {
+        this.phonenumber = phonenumber;
     }
 
     public String getCompany() {
@@ -45,14 +52,6 @@ public class Person {
         this.company = company;
     }
 
-    public int getGroupId() {
-        return groupId;
-    }
-
-    public void setGroupId(int groupId) {
-        this.groupId = groupId;
-    }
-
     public String getBirthPlace() {
         return birthPlace;
     }
@@ -61,12 +60,20 @@ public class Person {
         this.birthPlace = birthPlace;
     }
 
-    public boolean isSex() {
+    public String getSex() {
         return sex;
     }
 
-    public void setSex(boolean sex) {
+    public void setSex(String sex) {
         this.sex = sex;
+    }
+
+    public int getGroupId() {
+        return groupId;
+    }
+
+    public void setGroupId(int groupId) {
+        this.groupId = groupId;
     }
 
     public String getPersonRepository() {
@@ -75,5 +82,15 @@ public class Person {
 
     public void setPersonRepository(String personRepository) {
         this.personRepository = personRepository;
+    }
+
+    //添加"改"方法
+    public void updatePerson(){
+
+    }
+
+    //添加"查找"方法
+    public void findPerson(){
+
     }
 }
