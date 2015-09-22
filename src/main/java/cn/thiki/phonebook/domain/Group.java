@@ -7,18 +7,18 @@ public class Group {
     /**
      * 添加Group的属性;
      */
-    private int id;
+    private String id;
     private String groupsname;
 
     /**
      * 写属性的get and set方法;
      * @return
      */
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -29,7 +29,7 @@ public class Group {
     public void setGroupsname(String groupsname) {
         this.groupsname = groupsname;
     }
-
+    /*
     //添加"改"方法
     public void updateGroup(){
 
@@ -38,5 +38,10 @@ public class Group {
     //添加"查找"方法
     public void findGroup(){
 
+    }
+    */
+    public Group(String id,String groupsname){
+        this.id = id;
+        this.groupsname = groupsname;
     }
 }

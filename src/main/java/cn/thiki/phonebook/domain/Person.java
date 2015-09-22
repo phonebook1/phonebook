@@ -84,6 +84,7 @@ public class Person {
         this.personRepository = personRepository;
     }
 
+    /*
     //添加"改"方法
     public void updatePerson(){
 
@@ -92,5 +93,17 @@ public class Person {
     //添加"查找"方法
     public void findPerson(){
 
+    }
+    */
+
+    public Person(int id,String name,String phonenumber,String company
+            ,String birthPlace,String sex,int groupId){
+        this.id = id;
+        this.name = name;
+        this.phonenumber = phonenumber;
+        this.company = company;
+        this.birthPlace = birthPlace;
+        this.sex = sex;
+        this.groupId = groupId;
     }
 }
