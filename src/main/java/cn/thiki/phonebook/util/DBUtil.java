@@ -47,8 +47,8 @@ public class DBUtil {
                 result.add(item);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+        e.printStackTrace();
         }
         return result;
-    }
+        }
 }

@@ -1,38 +1,25 @@
 package cn.thiki.phonebook.domain;
 
+import cn.thiki.phonebook.persistence.GroupsRepository;
+
+import java.util.List;
+import java.util.Map;
+
 /**
  * Created by Administrator on 2015/9/5.
  */
 public class Groups {
-    /**
-     * 添加Groups的属性;
-     */
-    private String groupsRepository;
+    private GroupsRepository groupsRepository;
 
-    /**
-     * 写groupsRepository的get and set方法;
-     * @return
-     */
-    public String getGroupsRepository() {
+    public Groups(){
+        this.groupsRepository = new GroupsRepository();
+    }
+
+    public GroupsRepository getGroupsRepository(){
         return groupsRepository;
     }
 
-    public void setGroupsRepository(String groupsRepository) {
-        this.groupsRepository = groupsRepository;
-    }
-
-    //添加"增"方法
-    public void addGroups(){
-
-    }
-
-    //添加"删除"方法
-    public void deleteGroups(){
-
-    }
-
-    //添加"查找"方法
-    public void findGroups() {
-
+    public List<Map<String, Object>> loaderGroups(){
+        return groupsRepository.loaderGroups();
     }
 }

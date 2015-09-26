@@ -19,7 +19,6 @@ public class Persons {
         return personsRepository;
     }
 
-
     public List<Map<String, Object>> loadPersons() {
         return personsRepository.loadPersons();
     }
