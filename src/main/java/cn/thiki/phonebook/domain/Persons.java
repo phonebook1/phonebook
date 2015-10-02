@@ -1,6 +1,7 @@
 package cn.thiki.phonebook.domain;
 
 import cn.thiki.phonebook.persistence.PersonsRepository;
+import com.alibaba.fastjson.JSONObject;
 
 import java.util.List;
 import java.util.Map;
@@ -21,5 +22,9 @@ public class Persons {
 
     public List<Map<String, Object>> loadPersons() {
         return personsRepository.loadPersons();
+    }
+
+    public void addPerson(JSONObject person) {
+        personsRepository.addPerson(person);
     }
 }

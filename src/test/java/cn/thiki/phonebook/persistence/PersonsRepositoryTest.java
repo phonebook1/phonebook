@@ -11,5 +11,4 @@ public class PersonsRepositoryTest {
         PersonsRepository personsRepository = new PersonsRepository();
         System.out.println(personsRepository.loadPersons());
     }
-
 }

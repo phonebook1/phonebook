@@ -1,47 +1,25 @@
 package cn.thiki.phonebook.domain;
 
+import cn.thiki.phonebook.persistence.GroupRepository;
+
+import java.util.List;
+import java.util.Map;
+
 /**
  * Created by Administrator on 2015/9/5.
  */
 public class Group {
-    /**
-     * 添加Group的属性;
-     */
-    private String id;
-    private String groupsname;
+    private GroupRepository groupRepository;
 
-    /**
-     * 写属性的get and set方法;
-     * @return
-     */
-    public String getId() {
-        return id;
+    public Group(){
+        this.groupRepository = groupRepository;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public GroupRepository getGroupRepository(){
+        return groupRepository;
     }
 
-    public String getGroupsname() {
-        return groupsname;
-    }
-
-    public void setGroupsname(String groupsname) {
-        this.groupsname = groupsname;
-    }
-    /*
-    //添加"改"方法
-    public void updateGroup(){
-
-    }
-
-    //添加"查找"方法
-    public void findGroup(){
-
-    }
-    */
-    public Group(String id,String groupsname){
-        this.id = id;
-        this.groupsname = groupsname;
+    public List<Map<String, Object>> loaderGroup(){
+        return groupRepository.loaderGroup();
     }
 }
