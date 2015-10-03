@@ -27,4 +27,12 @@ public class Persons {
     public void addPerson(JSONObject person) {
         personsRepository.addPerson(person);
     }
+
+    public void deletePerson(int id) throws Exception {
+        personsRepository.deletePerson(id);
+    }
+
+    public void updatePerson(int id, JSONObject person) throws Exception {
+        personsRepository.updatePerson(id,person);
+    }
 }

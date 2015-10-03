@@ -71,4 +71,42 @@ public class DBUtil {
         }
         return i;
     }
+
+    public static int delete(String tableName, int id) {
+        Connection conn = getConnection();
+        int i = 0;
+        String sql = String.format("delete from %s where id='" + id + "'", tableName);
+        PreparedStatement pstmt;
+        try {
+            pstmt = conn.prepareStatement(sql);
+            i = pstmt.executeUpdate();
+            System.out.println("result: " + i);
+            pstmt.close();
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return i;
+    }
+
+    public static int update(String tableName, int id, JSONObject data) {
+        Connection conn = getConnection();
+        int i = 0;
+        StringBuilder sql = new StringBuilder("update " + tableName+" set ");
+        for (Map.Entry entry : data.entrySet()) {
+            sql.append("" + entry.getKey() + "='" + entry.getValue() + "',");
+        }
+        sql.delete(sql.length() - 1, sql.length());
+        sql.append(" where id=" + id);
+        PreparedStatement pstmt;
+        try {
+            pstmt = conn.prepareStatement(sql.toString());
+            i = pstmt.executeUpdate();
+            pstmt.close();
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return i;
+    }
 }

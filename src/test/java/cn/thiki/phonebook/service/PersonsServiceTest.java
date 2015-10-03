@@ -11,8 +11,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.context.WebApplicationContext;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
@@ -43,12 +42,28 @@ public class PersonsServiceTest {
                 .andExpect(content().json("{\"code\":\"0000\",\"message\":\"响应成功\",\"persons\":[{\"name\":\"小明\",\"phoneNumber\":\"15050788711\",\"groupId\":1,\"groupName\":\"家人\"},{\"name\":\"小红\",\"phoneNumber\":\"15050788721\",\"groupId\":3,\"groupName\":\"同事\"}]}"))
         ;
     }
+
     @Test
     public void 新增联系人() throws Exception {
-        String json="{\"name\":\"王五\",\"phoneNumber\":\"13800000001\",\"groupId\":\"1\"}";
+        String json = "{\"name\":\"王五\",\"phoneNumber\":\"13800000001\",\"groupId\":\"1\"}";
         mockMvc.perform(post(URL, "json").characterEncoding("UTF-8")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(json.getBytes()))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    public void 删除联系人() throws Exception {
+        mockMvc.perform(delete("/persons/10"))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    public void 根据ID更新联系人() throws Exception {
+        String person = "{\"name\":\"王da五\",\"phoneNumber\":\"13600000001\"}";
+        mockMvc.perform(put("/persons/9").characterEncoding("UTF-8")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(person))
                 .andExpect(status().isOk());
     }
 

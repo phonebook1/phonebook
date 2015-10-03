@@ -23,4 +23,20 @@ public class PersonsRepository {
     public int addPerson(JSONObject person) {
         return DBUtil.insert("persons", person);
     }
+
+    public int deletePerson(int id) throws Exception {
+        int effectedRows = DBUtil.delete("persons", id);
+        if (effectedRows == 0) {
+            throw new Exception("删除未成功");
+        }
+        return effectedRows;
+    }
+
+    public int updatePerson(int id, JSONObject person) throws Exception {
+        int effectedRows = DBUtil.update("persons", id, person);
+        if (effectedRows == 0) {
+            throw new Exception("更新失败");
+        }
+        return effectedRows;
+    }
 }
