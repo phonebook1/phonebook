@@ -2,10 +2,9 @@ package cn.thiki.phonebook.service;
 
 import cn.thiki.phonebook.domain.Groups;
 import cn.thiki.phonebook.util.JSONResult;
+import com.alibaba.fastjson.JSONObject;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
@@ -23,5 +22,26 @@ public class GroupsService {
     public Object loaderGroups(){
         List<Map<String,Object>> groupsList = groups.loaderGroups();
         return JSONResult.response("groups", groupsList);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/groups" , method = RequestMethod.POST)
+    public Object addGroup(@RequestBody JSONObject group){
+        groups.addGroup(group);
+        return JSONResult.success();
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/groups/{id}",method = RequestMethod.DELETE)
+    public Object deleteGroup(@PathVariable int id) throws Exception {
+        groups.deleteGroup(id);
+        return JSONResult.success();
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/groups/{id}",method = RequestMethod.PUT)
+    public Object updateGroup(@PathVariable int id ,@RequestBody JSONObject group) throws Exception {
+        groups.updateGroup(id ,group);
+        return JSONResult.success();
     }
 }
