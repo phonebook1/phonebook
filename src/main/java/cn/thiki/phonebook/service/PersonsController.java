@@ -19,8 +19,8 @@ public class PersonsController {
 
     @ResponseBody
     @RequestMapping(value = "/persons", method = RequestMethod.GET)
-    public Object loadPersons() {
-        List<Map<String, Object>> personsList = persons.loadPersons();
+    public Object loadPersons(@RequestParam(value = "keyword", required = false) String keyword) {
+        List<Map<String, Object>> personsList = persons.loadPersons(keyword);
         return JSONResult.response("persons", personsList);
     }
 

@@ -21,7 +21,7 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
 @WebAppConfiguration
 @ContextConfiguration("file:src/main/webapp/WEB-INF/mvc-dispatcher-servlet.xml")
 public class GroupPersonsControllerTest {
-    public static final String URL = "/groups/3/persons";
+    public static final String URL = "/groups/2/persons";
     private MockMvc mockMvc;
 
     @SuppressWarnings("SpringJavaAutowiringInspection")
