@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../scripts/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $.ajax({
+                url: "/groups",
+                type: "get",
+                contentType: "application/json",
+                success: function (data) {
+                    var groups = data.groups;
+                    var dd1 = $("#groupId");
+                    dd1.append("<option value='-1'>--请选择--</option>");
+                    for (var i in groups) {
+                        dd1.append($("<option value='" + groups[i].id + "'>" + groups[i].groupName + "</option>"));
+                    }
+                },
+                error: function (msg) {
+                    alert("wrong warning!");
+                }
+            });
+        });
+
+        function addPerson() {
+            var person = {name: "", phoneNumber: "", groupId: ""};//定义JSON对象
+            person.name = $("#name").val();//如何获取输入框数据
+            person.phoneNumber = $("#phoneNumber").val();//如何获取输入框数据
+            person.groupId = $("#groupId").val();//如何获取下拉列表数据
+
+            $.ajax({
+                url: "/persons",
+                contentType: "application/json",
+                type: "post",
+                data: person,
+                data: JSON.stringify(person),
+                success: function (data) {
+                    alert("成功添加联系人");
+                    window.location.reload();
+                }
+            });
+        }
+    </script>
+
+</head>
+<body>
+<div id="main">
+    <div id="add-person">
+        <div><span>姓名</span><input id="name" name="name" type="text"/></div>
+        <div><span>电话</span><input id="phoneNumber" name="phoneNumber" type="text"/></div>
+        <div><span>分组</span><select id="groupId" name="groupName"></select></div>
+        <br/>
+
+        <div>
+            <button type="button" onclick="addPerson()">确定</button>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
+

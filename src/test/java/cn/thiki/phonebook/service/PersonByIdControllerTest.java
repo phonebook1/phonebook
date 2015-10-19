@@ -15,13 +15,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
 
 /**
- * Created by Administrator on 2015/10/8.
+ * Created by Administrator on 2015/10/19.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration("file:src/main/webapp/WEB-INF/mvc-dispatcher-servlet.xml")
-public class GroupPersonsControllerTest {
-    public static final String URL = "/groups/3/persons";
+public class PersonByIdControllerTest {
+    public static final String URL="/persons/3";
     private MockMvc mockMvc;
 
     @SuppressWarnings("SpringJavaAutowiringInspection")
@@ -29,14 +29,14 @@ public class GroupPersonsControllerTest {
     protected WebApplicationContext wac;
 
     @Before
-    public void setup() {
+    public void setup(){
         this.mockMvc = webAppContextSetup(this.wac).build();
     }
 
     @Test
-    public void 根据分组ID获取联系人() throws Exception {
+    public void 根据ID获取单个联系人() throws Exception {
         mockMvc.perform(get(URL))
                 .andExpect(status().isOk())
-        ;
+                ;
     }
 }

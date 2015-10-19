@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../scripts/jquery-2.1.4.min.js"></script>
+    <script>
+        $(function () {
+            loadGroups(); //1、获取分组信息并绑定到下拉列表中
+            var id = getUrlParam("id"); //2、获取参数ID的值
+
+            $.ajax({
+                url: "/persons/" + id,
+                contentType: "application/json",
+                success: function (data) {
+
+                }
+            });
+
+            //3、根据ID向服务器发送请求，获取要修改的联系人信息。获取成功后，将对应的值放到输入框中和下拉列表中。
+
+            /*
+             你每写一行代码，都必须搞清楚它是做什么的，即便这行代码是复制过来。刚才那些代码明显不是在做我们需要的事情
+             */
+        });
+        //获取url中的参数
+        function getUrlParam(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+            var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+            if (r != null) return unescape(r[2]);
+            return null; //返回参数值
+        }
+
+        function loadGroups() {
+            $.ajax({
+                url: "/groups",
+                type: "get",
+                contentType: "application/json",
+                success: function (data) {
+                    var groups = data.groups;
+                    var dd1 = $("#groupId");
+                    dd1.append("<option value='-1'>--请选择--</option>");
+                    for (var i in groups) {
+                        dd1.append($("<option value='" + groups[i].id + "'>" + groups[i].groupName + "</option>"));
+                    }
+                },
+                error: function (msg) {
+                    alert("wrong warning!");
+                }
+            });
+        }
+    </script>
+
+</head>
+<body>
+<div id="main">
+    <div id="add-person">
+        <div><span>姓名</span><input id="name" name="name" type="text"/></div>
+        <div><span>电话</span><input id="phoneNumber" name="phoneNumber" type="text"/></div>
+        <div><span>分组</span><select id="groupId" name="groupName"></select></div>
+        <br/>
+
+        <div>
+            <button type="button" onclick="savePerson()">修改</button>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

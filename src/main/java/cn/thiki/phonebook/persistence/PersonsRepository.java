@@ -14,11 +14,11 @@ public class PersonsRepository {
     /**
      * 建立获取数据的方法
      *
-     * @param keyWord
+     * @param keyword
      */
     public List<Map<String, Object>> loadPersons(String keyword) {
         String sql;
-        if (keyword.equals("")) {
+        if (keyword==null||keyword.equals("")) {
             sql = "select persons.id,name,phoneNumber,groupName from persons join groups on persons.groupId=groups.id";
         } else {
             sql = String.format("select persons.id,name,phoneNumber,groupName from persons join groups on persons.groupId=groups.id" +
