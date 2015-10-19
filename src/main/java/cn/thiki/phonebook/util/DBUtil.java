@@ -110,4 +110,24 @@ public class DBUtil {
         return i;
     }
 
+    public static Map<String, Object> getMapBySQL(String sql) {
+        Connection connection = getConnection();//与接口连接
+        PreparedStatement preparedStatement;
+        Map<String, Object> result = new HashMap<String, Object>();
+        try {
+            preparedStatement = connection.prepareStatement(sql);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            int columnsNumber = resultSet.getMetaData().getColumnCount();
+            while (resultSet.next()) {
+                Map<String, Object> item = new HashMap<String, Object>();
+                for (int i = 1; i <= columnsNumber; i++) {
+                    result.put(resultSet.getMetaData().getColumnName(i), resultSet.getObject(i));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
 }

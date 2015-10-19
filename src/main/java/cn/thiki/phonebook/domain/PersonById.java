@@ -2,7 +2,6 @@ package cn.thiki.phonebook.domain;
 
 import cn.thiki.phonebook.persistence.PersonByIdRepository;
 
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -15,7 +14,7 @@ public class PersonById {
         this.personByIdRepository = new PersonByIdRepository();
     }
 
-    public List<Map<String,Object>> loadPerson(int id) {
+    public Map<String, Object> loadPerson(int id) {
         return personByIdRepository.loadPerson(id);
     }
 }

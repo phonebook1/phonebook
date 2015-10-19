@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -22,7 +21,7 @@ public class PersonByIdController {
     @ResponseBody
     @RequestMapping(value = "/persons/{id}",method = RequestMethod.GET)
     public Object loaderPerson(@PathVariable int id){
-        List<Map<String,Object>> personList = personById.loadPerson(id);
-        return JSONResult.response("persons", personList);
+        Map<String,Object> person = personById.loadPerson(id);
+        return JSONResult.response("person", person);
     }
 }

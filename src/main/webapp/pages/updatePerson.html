@@ -5,15 +5,19 @@
     <title></title>
     <script src="../scripts/jquery-2.1.4.min.js"></script>
     <script>
+        var id;
         $(function () {
             loadGroups(); //1、获取分组信息并绑定到下拉列表中
-            var id = getUrlParam("id"); //2、获取参数ID的值
+            id = getUrlParam("id"); //2、获取参数ID的值
 
             $.ajax({
                 url: "/persons/" + id,
                 contentType: "application/json",
                 success: function (data) {
-
+                    var person = data.person;
+                    $("#name").val(person.name);
+                    $("#phoneNumber").val(person.phoneNumber);
+                    $("#groupId").val(person.groupId);
                 }
             });
 
@@ -38,14 +42,33 @@
                 contentType: "application/json",
                 success: function (data) {
                     var groups = data.groups;
-                    var dd1 = $("#groupId");
-                    dd1.append("<option value='-1'>--请选择--</option>");
+                    var groupId = $("#groupId");
+                    groupId.append("<option value='-1'>--请选择--</option>");
                     for (var i in groups) {
-                        dd1.append($("<option value='" + groups[i].id + "'>" + groups[i].groupName + "</option>"));
+                        groupId.append($("<option value='" + groups[i].id + "'>" + groups[i].groupName + "</option>"));
                     }
                 },
                 error: function (msg) {
                     alert("wrong warning!");
+                }
+            });
+        }
+
+        function savePerson() {
+            var person = {name: "", phoneNumber: "", groupId: ""};//定义JSON对象
+            person.name = $("#name").val();//如何获取输入框数据
+            person.phoneNumber = $("#phoneNumber").val();//如何获取输入框数据
+            person.groupId = $("#groupId").val();//如何获取下拉列表数据
+
+            $.ajax({
+                url: "/persons/" + id,
+                contentType: "application/json",
+                type: "put",
+                data: person,
+                data: JSON.stringify(person),
+                success: function (data) {
+                    alert("修改成功");
+                    window.location.reload();
                 }
             });
         }
