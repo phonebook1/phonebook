@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../scripts/jquery-2.1.4.min.js"></script>
+
+    <script>
+        $(function(){
+            $.ajax({
+                url:"/groups/"+id,
+                type:"put",
+                contentType:"application/json",
+                success:function(data){
+                    var group = data.group();
+                    $("#groupName").val(group.groupName);
+                }
+            })
+        });
+
+        function getUrlParam(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return unescape(r[2]);
+            return null; //返回参数值
+        }
+
+       /* function loadGroup(){
+            $.ajax({
+                url:"/groups",
+                type:"get",
+                contentType:"application/json",
+                success:function(data){
+                    var groups = data.groups();
+                    var row = $("#groupName");
+                    row.append(groups.groupName);
+                }
+            })
+        }*/
+
+        function update_group(){
+
+        }
+    </script>
+</head>
+<body>
+
+<div>
+    <div>
+        <div><span>组别名:</span><input type="text" id="groupName" name="groupName"></div>
+        <br>
+        <div><button type="button" onclick="update_group">修改</button></div>
+    </div>
+</div>
+</body>
+</html>

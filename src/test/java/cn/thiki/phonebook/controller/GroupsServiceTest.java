@@ -1,4 +1,4 @@
-package cn.thiki.phonebook.service;
+package cn.thiki.phonebook.controller;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -12,18 +12,17 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.context.WebApplicationContext;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
 
 /**
- * Created by �� on 2015/9/20.
+ * Created by Administrator on 2015/10/7.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration("file:src/main/webapp/WEB-INF/mvc-dispatcher-servlet.xml")
-public class PersonsServiceTest {
-    public static final String URL = "/persons";
+public class GroupsServiceTest {
+    public static String URL = "/groups";
     private MockMvc mockMvc;
 
     @SuppressWarnings("SpringJavaAutowiringInspection")
@@ -36,16 +35,15 @@ public class PersonsServiceTest {
     }
 
     @Test
-    public void 获取联系人列表() throws Exception {
+    public void 获取分组列表() throws Exception {
         mockMvc.perform(get(URL))
                 .andExpect(status().isOk())
-                .andExpect(content().json("{\"code\":\"0000\",\"message\":\"响应成功\",\"persons\":[{\"name\":\"小明\",\"phoneNumber\":\"15050788711\",\"groupId\":1,\"groupName\":\"家人\"},{\"name\":\"小红\",\"phoneNumber\":\"15050788721\",\"groupId\":3,\"groupName\":\"同事\"}]}"))
         ;
     }
 
     @Test
-    public void 新增联系人() throws Exception {
-        String json = "{\"name\":\"王五\",\"phoneNumber\":\"13800000001\",\"groupId\":\"1\"}";
+    public void 新增分组() throws Exception {
+        String json = "{\"groupName\":\"学生\"}";
         mockMvc.perform(post(URL, "json").characterEncoding("UTF-8")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(json.getBytes()))
@@ -53,17 +51,17 @@ public class PersonsServiceTest {
     }
 
     @Test
-    public void 删除联系人() throws Exception {
-        mockMvc.perform(delete("/persons/10"))
+    public void 删除分组() throws Exception {
+        mockMvc.perform(delete("/groups/1"))
                 .andExpect(status().isOk());
     }
 
     @Test
-    public void 根据ID更新联系人() throws Exception {
-        String person = "{\"name\":\"王da五\",\"phoneNumber\":\"13600000001\"}";
-        mockMvc.perform(put("/persons/9").characterEncoding("UTF-8")
+    public void 根据ID更新分组() throws Exception {
+        String group = "{\"groupName\":\"老师\"}";
+        mockMvc.perform(put("/groups/5").characterEncoding("UTF-8")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(person))
+                .content(group))
                 .andExpect(status().isOk());
     }
 

@@ -17,6 +17,7 @@ public class JSONResult {
             put(key, data);
         }};
     }
+
     public static JSONObject response(final String key, final Map data) {
         return new JSONObject() {{
             put("code", "0000");

@@ -1,4 +1,4 @@
-package cn.thiki.phonebook.service;
+package cn.thiki.phonebook.controller;
 
 import org.junit.Before;
 import org.junit.Test;

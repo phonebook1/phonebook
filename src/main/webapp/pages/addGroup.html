@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../scripts/jquery-2.1.4.min.js"></script>
+
+    <script>
+        function addGroup(){
+            var group = {groupName:""};
+            group.groupName = $("#groupName").val();
+
+            $.ajax({
+                url:"/groups",
+                type:"post",
+                contentType:"application/json",
+                //data:group,
+                data:JSON.stringify(group),
+                success:function(data){
+                    alert("成功添加组别");
+                    window.location.reload();
+                }
+            })
+        }
+    </script>
+</head>
+<body>
+
+<div>
+    <div>
+        <div><span>组别名:</span><input type="text" id="groupName" name="groupName"/></div>
+        <br />
+        <div>
+        <button type="button" onclick="addGroup()">确定</button>
+        <div>
+    </div>
+</div>
+</body>
+</html>

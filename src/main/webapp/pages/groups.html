@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312"/>
+    <script src="../scripts/jquery-2.1.4.min.js"></script>
+</head>
+<body>
+<script>
+    $(function(){
+        $.ajax({
+            url:"/groups",
+            contentType:"application/json",
+            success:function(data){
+                var groups = data.groups;
+                for(var index in groups){
+                    var group = groups[index];
+                    var idCell = $("<td></td>").html(group.id);
+                    var groupNameCell = $("<td></td>").html(group.groupName);
+                    var deleteButtonCell = $("<td></td>").html("<input type='button' value='删除' onclick='delete_group("+group.id+")'>");
+                    var updateButtonCell = $("<td></td>").html("<input type='button' value='修改' onclick='openNewPageGroup("+group.id+")'>");
+                    var row = $("<tr></tr>").append(idCell);
+                    row.append(groupNameCell);
+                    row.append(deleteButtonCell);
+                    row.append(updateButtonCell);
+                    $("#groups_table").append(row);
+                }
+            }
+        })
+    });
+
+    function openNewPageGroup(id){
+        window.open("updateGroup.html?id="+id);
+    }
+
+    function delete_group(id){
+        confirm_delete = confirm("Sure To Delete Group?");
+        if(confirm_delete){
+            alert("删除的分组ID:"+id);
+            $.ajax({
+                url:"/groups/"+id,
+                type:"delete",
+                contentType:"application/json",
+                success:function(data){
+                    alert("成功删除分组");
+                    window.location.reload();
+                }
+            })
+        }
+    }
+
+</script>
+<style>
+    #groups_table{
+        border-collapse: collapse;
+        border: none;
+    }
+
+    #groups_table th,td{
+        border: solid #A9A9A9 1px;
+        text-align: center;
+        vertical-align: middle;
+    }
+
+</style>
+
+<h1>分组</h1>
+<table id="groups_table" cellpadding="10px">
+    <a href="addGroup.html" target="_blank">新增组别</a>
+    <br />
+    <tr>
+        <th>序号</th>
+        <th>组名</th>
+        <th>删除</th>
+        <th>修改</th>
+    </tr>
+</table>
+</body>
+</html>

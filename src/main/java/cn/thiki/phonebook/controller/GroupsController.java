@@ -1,4 +1,4 @@
-package cn.thiki.phonebook.service;
+package cn.thiki.phonebook.controller;
 
 import cn.thiki.phonebook.domain.Groups;
 import cn.thiki.phonebook.util.JSONResult;
@@ -14,12 +14,12 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping("/")
-public class GroupsService {
+public class GroupsController {
     private Groups groups = new Groups();
 
     @ResponseBody
     @RequestMapping(value = "/groups" ,method = RequestMethod.GET)
-    public Object loaderGroups(){
+    public Object loadGroups(){
         List<Map<String,Object>> groupsList = groups.loaderGroups();
         return JSONResult.response("groups", groupsList);
     }

@@ -1,4 +1,4 @@
-package cn.thiki.phonebook.service;
+package cn.thiki.phonebook.controller;
 
 import cn.thiki.phonebook.domain.PersonById;
 import cn.thiki.phonebook.util.JSONResult;

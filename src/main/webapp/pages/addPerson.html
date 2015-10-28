@@ -12,10 +12,10 @@
                 contentType: "application/json",
                 success: function (data) {
                     var groups = data.groups;
-                    var dd1 = $("#groupId");
-                    dd1.append("<option value='-1'>--请选择--</option>");
+                    var rowName = $("#groupId");
+                    rowName.append("<option value='-1'>--请选择--</option>");
                     for (var i in groups) {
-                        dd1.append($("<option value='" + groups[i].id + "'>" + groups[i].groupName + "</option>"));
+                        rowName.append($("<option value='" + groups[i].id + "'>" + groups[i].groupName + "</option>"));
                     }
                 },
                 error: function (msg) {
