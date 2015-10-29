@@ -6,13 +6,15 @@
     <script src="../scripts/jquery-2.1.4.min.js"></script>
 
     <script>
+        var id;
         $(function(){
+            id = getUrlParam("id");
+
             $.ajax({
                 url:"/groups/"+id,
-                type:"put",
                 contentType:"application/json",
                 success:function(data){
-                    var group = data.group();
+                    var group = data.group;
                     $("#groupName").val(group.groupName);
                 }
             })
@@ -25,21 +27,21 @@
             return null; //返回参数值
         }
 
-       /* function loadGroup(){
+        function update_group(){
+            var group = {groupName:""};
+            group.groupName = $("#groupName").val();
+
             $.ajax({
-                url:"/groups",
-                type:"get",
+                url:"/groups/"+id,
+                type:"put",
                 contentType:"application/json",
+                data:group,
+                data:JSON.stringify(group),
                 success:function(data){
-                    var groups = data.groups();
-                    var row = $("#groupName");
-                    row.append(groups.groupName);
+                    alert("修改成功");
+                    window.location.reload();
                 }
             })
-        }*/
-
-        function update_group(){
-
         }
     </script>
 </head>
