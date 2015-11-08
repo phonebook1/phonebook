@@ -20,7 +20,7 @@ public class PersonByIdController {
 
     @ResponseBody
     @RequestMapping(value = "/persons/{id}",method = RequestMethod.GET)
-    public Object loaderPerson(@PathVariable int id){
+    public Object loadPerson(@PathVariable int id){
         Map<String,Object> person = personById.loadPerson(id);
         return JSONResult.response("person", person);
     }
